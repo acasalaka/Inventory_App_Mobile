@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app_mobile/widgets/left_drawer.dart';
+import 'package:inventory_app_mobile/widgets/shop_card.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
@@ -12,17 +14,15 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    // Overall app
-    backgroundColor:Colors.orange[50], // Mengubah background color dari overall app
+      backgroundColor: Colors.orange[50],
       appBar: AppBar(
         title: const Text(
-          'Shopping List',
-          style: TextStyle(
-            color: Colors.white,
-          ),
+            'Inventory App Mobile',
+            style: const TextStyle(color: Colors.black)
         ),
-        backgroundColor:Colors.white,
+        backgroundColor: Colors.white,
       ),
+      drawer: const LeftDrawer(),
       body: SingleChildScrollView(
         // Widget wrapper yang dapat discroll
         child: Padding(
@@ -34,10 +34,10 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                 child: Text(
-                  'Inventory App', // Text yang menandakan toko
+                  'Selamat Datang! Selamat Berbelanja!', // Text yang menandakan toko
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 25,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -69,49 +69,4 @@ class ShopItem {
   final IconData icon;
 
   ShopItem(this.name, this.icon);
-}
-
-class ShopCard extends StatelessWidget {
-  final ShopItem item;
-
-  const ShopCard(this.item, {super.key}); // Constructor
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.grey[100],
-      child: InkWell(
-        // Area responsive terhadap sentuhan
-        onTap: () {
-          // Memunculkan SnackBar ketika diklik
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(SnackBar(
-                content: Text("Kamu telah menekan tombol ${item.name}!")));
-        },
-        child: Container(
-          // Container untuk menyimpan Icon dan Text
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  item.icon,
-                  color: Colors.black,
-                  size: 30.0,
-                ),
-                const Padding(padding: EdgeInsets.all(3)),
-                Text(
-                  item.name,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.black),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
