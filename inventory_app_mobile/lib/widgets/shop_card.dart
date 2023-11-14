@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app_mobile/screens/shoplist_form.dart';
-import 'package:inventory_app_mobile/screens/menu.dart';
+import 'package:inventory_app_mobile/screens/see_products.dart';
+
+class ShopItem {
+  final String name;
+  final IconData icon;
+
+  ShopItem(this.name, this.icon);
+}
 
 class ShopCard extends StatelessWidget {
   final ShopItem item;
@@ -19,10 +26,22 @@ class ShopCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
+
           // Navigate ke route yang sesuai (tergantung jenis tombol)
           if (item.name == "Tambah Produk") {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ShopFormPage()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ShopFormPage()
+                ));
+          }
+
+          if (item.name == "Lihat Produk") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ProductListPage(products: productList)),
+            );
           }
         },
         child: Container(

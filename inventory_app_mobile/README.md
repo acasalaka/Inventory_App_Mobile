@@ -244,3 +244,427 @@ samples, guidance on mobile development, and a full API reference.
     12. SnackBar: Muncul ketika salah satu kartu ditekan dan memberikan umpan balik kepada pengguna.
 
 </details>
+
+<details>
+<summary> Tugas 8 Pemrograman Berbasis Platform </summary>
+
+</br>
+
+# Tugas 8 Pemrograman Berbasis Platform
+
+1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+
+Dalam Flutter, `Navigator.push()` dan `Navigator.pushReplacement()` adalah dua metode yang digunakan untuk navigasi antar halaman.
+
+a. `Navigator.push()` digunakan untuk menavigasi ke halaman baru tanpa menghapus halaman saat ini dari tumpukan navigasi. Jadi, ketika kita menekan tombol kembali, kita tidak akan keluar dari aplikasi, tetapi kembali ke halaman sebelumnya. Di bawah ini adalah contoh penggunaannya.
+
+```
+Navigator.push(
+  context,
+  MaterialPageRoute(builder: (context) => MyHomePage()),
+);
+```
+Dalam contoh di atas, kita menavigasi ke `MyHomePage()` tanpa menghapus halaman saat ini. Jadi, ketika kita menekan tombol kembali, kita akan kembali ke halaman sebelumnya.
+
+b. `Navigator.pushReplacement()` digunakan untuk menghapus route yang sedang ditampilkan kepada pengguna dan menggantinya dengan suatu route. Jadi, ketika kita menekan tombol kembali, kita tidak akan kembali ke halaman sebelumnya, tetapi akan keluar dari aplikasi. Di bawah ini adalah contoh penggunaannya.
+
+```
+Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+        builder: (context) => MyHomePage(),
+));
+```
+Dalam contoh di atas, kita menavigasi ke `MyHomePage()` dan menghapus halaman saat ini. Jadi, ketika kita menekan tombol kembali, kita tidak akan kembali ke halaman sebelumnya, tetapi akan keluar dari aplikasi.
+
+2. Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
+
+Kode widget yang digunakan pada `left_drawer.dart` adalah `Drawer` widget dalam Flutter. `Drawer` ini memiliki dua `ListTile` yang masing-masing mengarah ke halaman yang berbeda ketika diklik. Di bawah ini adalah penjelasan masing-masing layout widgets dan konteks penggunaannya masing-masing.
+
+- `Drawer`: Widget utama yang menciptakan sebuah panel navigasi horizontal (drawer) yang biasanya digunakan dalam `Scaffold.drawer` property.
+
+- `Container`: Widget ini memberikan box painting, positioning, dan sizing untuk child-nya. Dalam kasus ini, digunakan untuk memberikan warna latar belakang pada `Drawer`.
+
+- `ListView`: Widget ini digunakan untuk menampilkan daftar scrollable dari widget. Dalam kasus ini, digunakan untuk menampilkan daftar menu dalam `Drawer`.
+
+- `DrawerHeader`: Widget ini memberikan header untuk `Drawer`. Header ini menampilkan judul aplikasi dan deskripsi singkat.
+
+- `ListTile`: Widget ini biasanya digunakan untuk memberikan item dalam `ListView`. Dalam kasus ini, digunakan untuk memberikan menu dalam `Drawer`. Setiap `ListTile` memiliki ikon dan teks, dan juga aksi yang terjadi ketika menu tersebut diklik (navigasi ke halaman lain).
+
+Secara keseluruhan, kode ini menciptakan sebuah `Drawer` dengan dua menu: "Halaman Utama" dan "Tambah Produk". Ketika menu "Halaman Utama" diklik, aplikasi akan menavigasi ke `MyHomePage`. Ketika menu "Tambah Produk" diklik, aplikasi akan menavigasi ke `ShopFormPage`.
+ 
+3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+
+**TextFormField**: elemen input teks biasa. Digunakan untuk memasukkan nama dan harga produk. `TextFormField` memiliki beberapa properti seperti `decoration` untuk mengatur tampilan input, `onChanged` untuk menangani perubahan nilai input, dan `validator` untuk melakukan validasi input.
+
+Berikut adalah penjelasan singkat tentang kode tersebut:
+
+- `ShopFormPage`: Ini adalah `StatefulWidget` yang mengembalikan `Scaffold` yang berisi form untuk menambahkan produk.
+
+- `_formKey`: Ini adalah `GlobalKey` yang digunakan untuk mengidentifikasi `Form` widget dan memvalidasi input form.
+
+- `_name`, `_price`, dan `_description`: Ini adalah variabel yang digunakan untuk menyimpan nilai input form.
+
+- `_saveProduct`: Ini adalah fungsi yang dipanggil ketika form disubmit. Fungsi ini akan menambahkan produk baru ke dalam `productList` jika form valid.
+
+- `Form`: Ini adalah widget yang mengelompokkan beberapa `FormField` bersama-sama dan menyediakan metode validasi.
+
+- `TextFormField`: Ini adalah widget yang menerima input teks dari pengguna. Widget ini memiliki validator untuk memeriksa apakah input valid.
+
+Secara keseluruhan, kode ini menciptakan sebuah form untuk menambahkan produk baru. Ketika form disubmit, produk baru akan ditambahkan ke dalam `productList` dan dialog akan ditampilkan untuk mengonfirmasi bahwa produk telah berhasil disimpan. Jika form tidak valid, pesan error akan ditampilkan di `TextFormField` yang tidak valid.
+ 
+4. Bagaimana penerapan clean architecture pada aplikasi Flutter?
+
+Clean Architecture adalah prinsip desain software yang memberlakukan pemisahan tanggung jawab. Tujuannya adalah untuk menciptakan basis kode yang modular. Cara menerapkan Clean Architecture pada aplikasi Flutter adalah dengan membaginya menjadi empat lapisan arsitektur. Berikut adalah penjelasan masing-masing lapisannya.
+
+a. Lapisan Data: Termasuk logika komunikasi dengan database, API jaringan, dll.
+
+b. Lapisan Domain: Berfungsi sebagai inti aplikasi yang berisi logika bisnis dan model data.
+
+c. Lapisan Fitur: Lapisan presentasi aplikasi, ini adalah lapisan yang paling bergantung pada kerangka kerja, karena berisi UI dan penanganan event dari UI.
+
+d. Lapisan Sumber Daya dan Shared Library: Lapisan pendukung yang berisi kode yang dapat digunakan kembali di seluruh aplikasi.
+
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
+
+[x] Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru dengan ketentuan sebagai berikut:
+
+a. Memakai minimal tiga elemen input, yaitu name, amount, description. Tambahkan elemen input sesuai dengan model pada aplikasi tugas Django yang telah kamu buat.
+
+Untuk menambahkan elemen input sesuai model, saya menambahkan kode berikut dengan tujuan mendefinisikan awalan elemen.
+
+```
+class _ShopFormPageState extends State<ShopFormPage> {
+  /* Elemen ShopFormPageState */
+  final _formKey = GlobalKey<FormState>();
+  late String _name;
+  late int _price;
+  late String _description;
+
+```
+
+b. Memiliki sebuah tombol Save.
+
+Tombol save dibuat dengan membuat sebuah ElevatedButton yang bertuliskan `Save`. Cara kerjanya adalah dia memiliki properti OnPressed dimana saat dia menerima input pada form ia akan menyimpannya. Saya membuatnya melalui kode di bawah ini.
+
+```
+Align(
+    alignment: Alignment.bottomCenter,
+    child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.white),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+                side: const BorderSide(color: Colors.black)
+            ),
+            ),  
+        ),
+        onPressed: _saveProduct,
+        child: const Text(
+            "Save",
+            style: TextStyle(color: Colors.black),
+        ),
+        ),
+    ),
+    ),
+```
+
+saveProducts adalah sebuah function yang akan menyimpan data dari produk yang diisi pada form. Function tersebut diletakkan di file `shoplist_form.dart` di dalam Class `_ShopFormPageState extends State<ShopFormPage>`.  Berikut adalah kode yang digunakan.
+
+```
+void _saveProduct() {
+    if (_formKey.currentState!.validate()) {
+      productList.add(Product(
+        name: _name,
+        price: _price,
+        description: _description,
+      ));
+  }
+
+```
+
+c. Setiap elemen input di formulir juga harus divalidasi dengan ketentuan sebagai berikut:
+
+   - Setiap elemen input tidak boleh kosong. --> Hal ini bisa dilakukan dengan cara mencari tahu apakah isi dari form (value-nya) kosong atau tidak.
+
+   - Setiap elemen input harus berisi data dengan tipe data atribut modelnya. --> Hal ini bisa dilakukan dengan melakukan parseType dari input form dan memvalidasi apakah input tersebut sesuai dengan tipe data yang diperlukan.
+
+```
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.orange[50],
+      appBar: AppBar(
+        title: const Center(
+          child: Text(
+            'Form Tambah Produk',
+          ),
+        ),
+        backgroundColor: Colors.white,
+      ),
+      drawer: const LeftDrawer(),
+      body: Form(
+        key: _formKey,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Nama Produk",
+                    labelText: "Nama Produk",
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  onChanged: (String value) {
+                    setState(() {
+                      _name = value;
+                    });
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Nama tidak boleh kosong!";
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Harga",
+                    labelText: "Harga",
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  onChanged: (String value) {
+                    setState(() {
+                      _price = int.tryParse(value) ?? 0;
+                    });
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Harga tidak boleh kosong!";
+                    }
+                    if (int.tryParse(value) == null) {
+                      return "Harga harus berupa angka!";
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Deskripsi",
+                    labelText: "Deskripsi",
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  onChanged: (String value) {
+                    setState(() {
+                      _description = value;
+                    });
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Deskripsi tidak boleh kosong!";
+                    }
+                    return null;
+                  },
+                ),
+              ),
+              
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
+d. Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol Tambah Item pada halaman utama.
+
+Untuk bisa membuat sebuah halaman baru yang bertujuan untuk menambah item baru, saya perlu menambahkan sebuah file baru di direktori baru bernama `screens` yang dinamakan `shoplist_form.dart`. Tujuan dari file ini adalah sebagai halaman tujuan dimana saat tombol `Tambah Produk` ditekan dia akan menampilkan kode di file ini.
+
+Di dalamnya, saya menambahkan kode ini sebagai penanda.
+
+```
+class ShopFormPage extends StatefulWidget {
+  const ShopFormPage({Key? key}) : super(key: key);
+
+  @override
+  State<ShopFormPage> createState() => _ShopFormPageState();
+}
+```
+
+Pada `shop_card.dart`, saya menambahkan kode di bawah ini untuk menghubungkan `shoplist_form` dengan `shop_card.dart`.
+    
+```
+// Navigate ke route yang sesuai (tergantung jenis tombol)
+if (item.name == "Tambah Produk") {
+Navigator.push(
+    context,
+    MaterialPageRoute(
+        builder: (context) => const ShopFormPage()
+    ));
+}
+```
+
+e. Memunculkan data sesuai isi dari formulir yang diisi dalam sebuah pop-up setelah menekan tombol Save pada halaman formulir tambah item baru.
+
+Data dimunculkan melalui pop-up dengan cara menambahkan showDialog yang berisi kode sebagai berikut.
+
+```
+    showDialog(
+    context: context,
+    builder: (context) {
+        return AlertDialog(
+        title: const Text('Produk berhasil tersimpan'),
+        content: SingleChildScrollView(
+            child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+                Text('Nama: $_name'),
+                Text('Harga: $_price'),
+                Text('Deskripsi: $_description'),
+            ],
+            ),
+        ),
+        actions: [
+            TextButton(
+            child: const Text('OK'),
+            onPressed: () {
+                Navigator.pop(context);
+            },
+            ),
+        ],
+        );
+    },
+    );
+
+    _formKey.currentState!.reset();
+}
+```
+
+[x] Membuat sebuah drawer pada aplikasi dengan ketentuan sebagai berikut:
+
+a. Drawer minimal memiliki dua buah opsi, yaitu Halaman Utama dan Tambah Item.
+
+```
+import 'package:flutter/material.dart';
+import 'package:inventory_app_mobile/screens/menu.dart';
+import 'package:inventory_app_mobile/screens/shoplist_form.dart';
+import '../screens/see_products.dart';
+
+class LeftDrawer extends StatelessWidget {
+  const LeftDrawer({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Container(
+        color: Colors.orange[50],
+        child: ListView(
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    'Inventory App Mobile',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Padding(padding: EdgeInsets.all(10)),
+                  Text("Catat seluruh keperluan belanjamu di sini!",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home_outlined),
+              title: const Text('Halaman Utama'),
+              // Bagian redirection ke MyHomePage
+              onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => MyHomePage(),
+                    ));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.add_shopping_cart),
+              title: const Text('Tambah Produk'),
+              // Bagian redirection ke ShopFormPage
+              onTap: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ShopFormPage(),
+                    ));
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.checklist),
+              title: const Text('Lihat Produk'),
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ProductListPage(products: productList)),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+Pada kode di atas, Drawer berisikan tiga Tiles yang istilahnya merupakan 'buttons' untuk berpindah ke halaman Tambah Produk, Lihat Produk, dan Halaman Utama. Disini saya menggunakan Navigator.pushReplacement agar aplikasi tidak tertutup saat saya menekan tombol back, sehingga aplikasi bisa berjalan terus menerus.
+
+b. Ketika memiih opsi Halaman Utama, maka aplikasi akan mengarahkan pengguna ke halaman utama.
+
+Sudah diimplementasikan di atas dengan cara menambahkan baris kode `MaterialPageRoute(builder: (context) => const MyHomePage(),` yang mana akan mengubah tampilan website dari leftDrawer menjadi halaman MyHomePage.
+
+c. Ketika memiih opsi (Tambah Item), maka aplikasi akan mengarahkan pengguna ke halaman form tambah item baru.
+
+Sudah diimplementasikan di atas dengan cara menambahkan baris kode `MaterialPageRoute(builder: (context) => const ShopFormPage(),` yang mana akan mengubah tampilan website dari leftDrawer menjadi halaman ShopFormPage.
+
+
+</details>

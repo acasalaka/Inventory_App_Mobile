@@ -18,7 +18,7 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(
             'Inventory App Mobile',
-            style: const TextStyle(color: Colors.black)
+            style: TextStyle(color: Colors.black)
         ),
         backgroundColor: Colors.white,
       ),
@@ -64,9 +64,9 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-class ShopItem {
-  final String name;
-  final IconData icon;
+// class ShopItem {
+//   final String name;
+//   final IconData icon;
 
-  ShopItem(this.name, this.icon);
-}
+//   ShopItem(this.name, this.icon);
+// }
