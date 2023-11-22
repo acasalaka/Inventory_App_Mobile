@@ -5,22 +5,21 @@ import 'package:inventory_app_mobile/widgets/shop_card.dart';
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
 
-  final List<ShopItem> items = [
-    ShopItem("Lihat Produk", Icons.checklist),
-    ShopItem("Tambah Produk", Icons.add_shopping_cart),
-    ShopItem("Logout", Icons.logout),
+  final List<ShoplistItem> items = [
+    ShoplistItem("Lihat Item", Icons.checklist),
+    ShoplistItem("Tambah Item", Icons.add_shopping_cart),
+    ShoplistItem("Logout", Icons.logout),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange[50],
       appBar: AppBar(
         title: const Text(
-            'Inventory App Mobile',
-            style: TextStyle(color: Colors.black)
+          'Inventory App Mobile',
         ),
-        backgroundColor: Colors.white,
+        backgroundColor:Colors.indigo,
+        foregroundColor: Colors.white,
       ),
       drawer: const LeftDrawer(),
       body: SingleChildScrollView(
@@ -34,10 +33,10 @@ class MyHomePage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                 // Widget Text untuk menampilkan tulisan dengan alignment center dan style yang sesuai
                 child: Text(
-                  'Selamat Datang! Selamat Berbelanja!', // Text yang menandakan toko
+                  'Selamat datang di Inventory App Mobile! Selamat berbelanja!', // Text yang menandakan toko
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -51,9 +50,9 @@ class MyHomePage extends StatelessWidget {
                 mainAxisSpacing: 10,
                 crossAxisCount: 3,
                 shrinkWrap: true,
-                children: items.map((ShopItem item) {
+                children: items.map((ShoplistItem item) {
                   // Iterasi untuk setiap item
-                  return ShopCard(item);
+                  return ShoplistCard(item);
                 }).toList(),
               ),
             ],
@@ -64,9 +63,9 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
-// class ShopItem {
-//   final String name;
-//   final IconData icon;
+class ShoplistItem {
+  final String name;
+  final IconData icon;
 
-//   ShopItem(this.name, this.icon);
-// }
+  ShoplistItem(this.name, this.icon);
+}
