@@ -36,7 +36,6 @@ class ShoplistCard extends StatelessWidget {
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}")));
           if (item.name == "Tambah Item") {
-            // TODO: Gunakan Navigator.push untuk melakukan navigasi ke MaterialPageRoute yang mencakup ShopFormPage.
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ProductFormPage()));
           }
@@ -46,7 +45,6 @@ class ShoplistCard extends StatelessWidget {
           }
           else if (item.name == "Logout") {
             final response = await request.logout(
-              // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                 "http://10.0.2.2:8000/auth/logout/");
             String message = response["message"];
             if (response['status']) {

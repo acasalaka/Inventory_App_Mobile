@@ -12,7 +12,6 @@ class DetailProductPage extends StatelessWidget {
   final int id;
 
   Future<List<Product>> fetchProduct() async {
-    // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
     var url = Uri.parse(
         'http://127.0.0.1:8000/json/${id}');
     var response = await http.get(

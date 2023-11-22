@@ -16,7 +16,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _name = "";
   int _amount = 0;
-  int _price = 0;
   String _description = "";
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
         backgroundColor: Colors.indigo,
         foregroundColor: Colors.white,
       ),
-      // TODO: Tambahkan drawer yang sudah dibuat di sini
       drawer: const LeftDrawer(),
       body: Form(
         key: _formKey,
@@ -73,7 +71,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
                           borderRadius: BorderRadius.circular(5.0),
                         ),
                       ),
-                      // TODO: Tambahkan variabel yang sesuai
                       onChanged: (String? value) {
                         setState(() {
                           _amount = int.parse(value!);
@@ -94,33 +91,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        hintText: "Harga",
-                        labelText: "Harga",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                      ),
-                      // TODO: Tambahkan variabel yang sesuai
-                      onChanged: (String? value) {
-                        setState(() {
-                          _price = int.parse(value!);
-                        });
-                      },
-                      validator: (String? value) {
-                        if (value == null || value.isEmpty) {
-                          return "Harga tidak boleh kosong!";
-                        }
-                        if (int.tryParse(value) == null) {
-                          return "Harga harus berupa angka!";
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
-                      decoration: InputDecoration(
                         hintText: "Deskripsi",
                         labelText: "Deskripsi",
                         border: OutlineInputBorder(
@@ -129,7 +99,6 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       ),
                       onChanged: (String? value) {
                         setState(() {
-                          // TODO: Tambahkan variabel yang sesuai
                           _description = value!;
                         });
                       },
@@ -152,16 +121,12 @@ class _ProductFormPageState extends State<ProductFormPage> {
                         ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            // Kirim ke Django dan tunggu respons
-                            // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
                             final response = await request.postJson(
                                 "http://127.0.0.1:8000/create-flutter/",
                                 jsonEncode(<String, String>{
                                   'name': _name,
                                   'amount':_amount.toString(),
-                                  'price': _price.toString(),
                                   'description': _description,
-                                  // TODO: Sesuaikan field data sesuai dengan aplikasimu
                                 }));
                             if (response['status'] == 'success') {
                               ScaffoldMessenger.of(context)
